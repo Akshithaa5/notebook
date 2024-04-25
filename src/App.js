@@ -1,23 +1,15 @@
-import logo from './logo.svg';
+import React from 'react';
+import NoteBook from './Components/NoteBook';
+import { NotebookProvider } from './Context/NotebookContext';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <h1>My NoteBook</h1>
+      <NotebookProvider>
+        <NoteBook />
+      </NotebookProvider>
     </div>
   );
 }
