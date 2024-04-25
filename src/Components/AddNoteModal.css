@@ -16,12 +16,12 @@
     background-color: #fefefe;
     margin: 15% auto;
     padding: 20px;
-    border: 1px solid #888;
+    border: 1px solid #5fc115;
     width: 80%;
   }
   
   .close {
-    color: #aaaaaa;
+    color: #bbd546;
     float: right;
     font-size: 28px;
     font-weight: bold;

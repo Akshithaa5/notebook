@@ -1,33 +1,39 @@
 import React, { useState } from 'react';
 import { useNotebook } from '../Context/NotebookContext';
+import './NoteBook.css';
 
 const NoteBook = () => {
-  const { notes, addNote, deleteNote } = useNotebook();
-  const [title, setTitle] = useState('');
-  const [desc, setDesc] = useState('');
+  const { notes, deleteNote } = useNotebook();
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const handleAddNote = () => {
-    addNote(title, desc);
-    setTitle('');
-    setDesc('');
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
   };
+
+  const filteredNotes = notes.filter((note) =>
+    note.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <div>
-      <label htmlFor="search">Search Notes: </label>
-      <input type="text" id="search" />
+      <label htmlFor="search">Search Notes:</label>
+      <input
+        type="text"
+        id="search"
+        value={searchQuery}
+        onChange={handleSearch}
+        placeholder="Search notes..."
+      />
 
       <div>
-        <label htmlFor="total">Total Notes: {notes.length}</label>
-        <label htmlFor="showing">Showing: {notes.length}</label>
+        <label>Total Notes: {notes.length}</label>
+        <label>Showing: {filteredNotes.length}</label>
       </div>
 
-      <button onClick={handleAddNote}>Add New Note</button>
-
-      {notes.map((note, index) => (
+      {filteredNotes.map((note, index) => (
         <div key={index}>
           <h3>{note.title}</h3>
-          <p>{note.desc}</p>
+          <p>{note.description}</p>
           <button onClick={() => deleteNote(index)}>Delete</button>
         </div>
       ))}

@@ -1,17 +1,18 @@
-import React, { useState, useContext } from 'react';
-import { NotebookContext } from '../Context/NotebookContext';
-import './AddNoteModal.css';
 
-function AddNoteModal({ isOpen, onClose }) {
+
+
+import React, { useState } from 'react';
+import { useNotebook } from '../Context/NotebookContext';
+
+const AddNoteModal = ({ isOpen, onClose }) => {
+  const { addNote } = useNotebook();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const { addNote } = useContext(NotebookContext);
 
   const handleAddNote = () => {
-    addNote({
-      title: title,
-      description: description
-    });
+    addNote(title, description);
+    setTitle('');
+    setDescription('');
     onClose();
   };
 
@@ -33,6 +34,7 @@ function AddNoteModal({ isOpen, onClose }) {
       </div>
     </div>
   );
-}
+};
 
 export default AddNoteModal;
+
